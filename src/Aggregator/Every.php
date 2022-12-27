@@ -24,8 +24,9 @@ class Every implements Aggregator
 
     public function __invoke(): bool
     {
-        while (($value = $this->inner->next()) !== null) {
-            if (!$this->fn->call($this, $value)) {
+        while (($value = $this->inner->next())->isSome()) {
+            /** @noinspection PhpUnhandledExceptionInspection */
+            if (!$this->fn->call($this, $value->unwrap())) {
                 return false;
             }
         }

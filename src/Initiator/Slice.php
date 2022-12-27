@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Siketyan\PhpIter\Initiator;
 
 use Siketyan\PhpIter\AbstractIterator;
+use Siketyan\PhpIter\Atom\Option;
 
 /**
  * @template TItem
@@ -23,14 +24,14 @@ class Slice extends AbstractIterator implements Initiator
     }
 
     /**
-     * @return null|TItem
+     * @return Option<TItem>
      */
-    public function next(): mixed
+    public function next(): Option
     {
         if ($this->cursor >= count($this->inner)) {
-            return null;
+            return Option::none();
         }
 
-        return $this->inner[$this->cursor++];
+        return Option::some($this->inner[$this->cursor++]);
     }
 }

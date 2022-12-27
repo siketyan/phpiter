@@ -22,6 +22,6 @@ class Some implements Aggregator
 
     public function __invoke(): bool
     {
-        return $this->inner->next() !== null;
+        return $this->inner->next()->isSome();
     }
 }

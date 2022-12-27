@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Siketyan\PhpIter\Transformer;
 
+use Siketyan\PhpIter\Atom\Option;
 use Siketyan\PhpIter\Iterator;
 use Siketyan\PhpIter\AbstractIterator;
 
@@ -26,15 +27,10 @@ class Map extends AbstractIterator implements Transformer
     }
 
     /**
-     * @return null|TItem
+     * @return Option<TItem>
      */
-    public function next(): mixed
+    public function next(): Option
     {
-        $input = $this->inner->next();
-        if ($input === null) {
-            return null;
-        }
-
-        return $this->fn->call($this, $input);
+        return $this->inner->next()->map($this->fn);
     }
 }

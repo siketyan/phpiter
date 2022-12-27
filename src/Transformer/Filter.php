@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Siketyan\PhpIter\Transformer;
 
 use Siketyan\PhpIter\AbstractIterator;
+use Siketyan\PhpIter\Atom\Option;
 use Siketyan\PhpIter\Iterator;
 
 /**
@@ -25,16 +26,18 @@ class Filter extends AbstractIterator implements Transformer
     }
 
     /**
-     * @return null|TItem
+     * @return Option<TItem>
+     * @noinspection PhpDocMissingThrowsInspection
      */
-    public function next(): mixed
+    public function next(): Option
     {
-        while (($value = $this->inner->next()) !== null) {
-            if ($this->fn->call($this, $value)) {
+        while (($value = $this->inner->next())->isSome()) {
+            /** @noinspection PhpUnhandledExceptionInspection */
+            if ($this->fn->call($this, $value->unwrap())) {
                 return $value;
             }
         }
 
-        return null;
+        return Option::none();
     }
 }
