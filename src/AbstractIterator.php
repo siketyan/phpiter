@@ -109,5 +109,13 @@ abstract class AbstractIterator implements Iterator
         return (new Some($fn === null ? $this : new Filter($this, $fn)))();
     }
 
+    /**
+     * @return TItem[]
+     */
+    public function toArray(): array
+    {
+        return $this->collect()->toArray();
+    }
+
     // endregion Aggregators
 }
