@@ -27,12 +27,10 @@ class Filter extends AbstractIterator implements Transformer
 
     /**
      * @return Option<TItem>
-     * @noinspection PhpDocMissingThrowsInspection
      */
     public function next(): Option
     {
         while (($value = $this->inner->next())->isSome()) {
-            /** @noinspection PhpUnhandledExceptionInspection */
             if ($this->fn->call($this, $value->unwrap())) {
                 return $value;
             }

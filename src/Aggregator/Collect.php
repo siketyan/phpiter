@@ -23,7 +23,6 @@ class Collect implements Aggregator
 
     /**
      * @return ArrayCollection<TItem>
-     * @noinspection PhpDocMissingThrowsInspection
      */
     public function __invoke(): ArrayCollection
     {
@@ -34,7 +33,6 @@ class Collect implements Aggregator
         $values = [];
 
         while (($value = $this->inner->next())->isSome()) {
-            /** @noinspection PhpUnhandledExceptionInspection */
             $values[] = $value->unwrap();
         }
 

@@ -9,8 +9,10 @@ use Siketyan\PhpIter\Aggregator\Collect;
 use Siketyan\PhpIter\Aggregator\Every;
 use Siketyan\PhpIter\Aggregator\Some;
 use Siketyan\PhpIter\Collection\ArrayCollection;
+use Siketyan\PhpIter\Transformer\Enumerate;
 use Siketyan\PhpIter\Transformer\Filter;
 use Siketyan\PhpIter\Transformer\Map;
+use Siketyan\PhpIter\Transformer\Zip;
 
 /**
  * @template TItem
@@ -23,6 +25,14 @@ abstract class AbstractIterator implements Iterator
     }
 
     // region Transformers
+
+    /**
+     * @return Enumerate<TItem>
+     */
+    public function enumerate(): Enumerate
+    {
+        return new Enumerate($this);
+    }
 
     /**
      * @param \Closure(TItem): bool $fn
@@ -41,6 +51,16 @@ abstract class AbstractIterator implements Iterator
     public function map(\Closure $fn): Map
     {
         return new Map($this, $fn);
+    }
+
+    /**
+     * @template TAnother
+     * @param  Iterator<TAnother>   $another
+     * @return Zip<TItem, TAnother>
+     */
+    public function zip(Iterator $another): Zip
+    {
+        return new Zip($this, $another);
     }
 
     // endregion Transformers
