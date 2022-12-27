@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Siketyan\PhpIter\Collection;
 
 use Siketyan\PhpIter\Initiator\Slice;
-use Siketyan\PhpIter\IntoIter;
 
 /**
  * @template TItem
- * @implements IntoIter<TItem>
+ * @implements Collection<TItem>
  */
-class ArrayCollection implements IntoIter
+class ArrayCollection implements Collection
 {
     /**
      * @param TItem[] $inner
@@ -27,5 +26,13 @@ class ArrayCollection implements IntoIter
     public function iter(): Slice
     {
         return new Slice($this->inner);
+    }
+
+    /**
+     * @return TItem[]
+     */
+    public function toArray(): array
+    {
+        return $this->inner;
     }
 }

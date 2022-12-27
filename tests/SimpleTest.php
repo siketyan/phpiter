@@ -20,7 +20,8 @@ class SimpleTest extends TestCase
         $actual = $collection
             ->iter()
             ->map(fn (string $value) => (int)$value)
-            ->collect();
+            ->collect()
+            ->toArray();
 
         $this->assertSame(
             [

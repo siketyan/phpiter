@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Siketyan\PhpIter\Aggregator;
 
+use Siketyan\PhpIter\Collection\ArrayCollection;
 use Siketyan\PhpIter\Iterator;
 
 /**
  * @template TItem
- * @implements Aggregator<TItem, TItem[]>
+ * @implements Aggregator<TItem, ArrayCollection<TItem>>
  */
 class Collect implements Aggregator
 {
@@ -21,16 +22,20 @@ class Collect implements Aggregator
     }
 
     /**
-     * @return TItem[]
+     * @return ArrayCollection<TItem>
      */
-    public function __invoke(): array
+    public function __invoke(): ArrayCollection
     {
+        /**
+         * @var TItem[] $values
+         * @noinspection PhpRedundantVariableDocTypeInspection
+         */
         $values = [];
 
         while (($value = $this->inner->next()) !== null) {
             $values[] = $value;
         }
 
-        return $values;
+        return new ArrayCollection($values);
     }
 }

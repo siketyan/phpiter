@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Siketyan\PhpIter;
 
 use Siketyan\PhpIter\Aggregator\Collect;
+use Siketyan\PhpIter\Collection\ArrayCollection;
 use Siketyan\PhpIter\Transformer\Map;
 
 /**
@@ -28,9 +29,9 @@ abstract class AbstractIterator implements Iterator
     }
 
     /**
-     * @return TItem[]
+     * @return ArrayCollection<TItem>
      */
-    public function collect(): array
+    public function collect(): ArrayCollection
     {
         return (new Collect($this))();
     }
