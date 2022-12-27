@@ -1,0 +1,45 @@
+{
+    "name": "siketyan/phpiter",
+    "description": "Strictly typed iterator for Rust lovers in PHP.",
+    "type": "library",
+    "license": "LGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Naoki Ikeguchi",
+            "email": "me@s6n.jp"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Siketyan\\PhpIter\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Siketyan\\PhpIter\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^8.1"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.9",
+        "phpunit/phpunit": "^9.5",
+        "yumemi-inc/php-cs-fixer-config": "^8.1"
+    },
+    "scripts": {
+        "cs": "php-cs-fixer fix -v --dry-run",
+        "cs-fix": "php-cs-fixer fix -v",
+        "stan": "phpstan",
+        "test": "phpunit",
+        "tests": [
+            "@cs",
+            "@stan",
+            "@test"
+        ]
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
