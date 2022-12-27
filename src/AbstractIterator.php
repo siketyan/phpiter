@@ -11,6 +11,7 @@ use Siketyan\PhpIter\Aggregator\Some;
 use Siketyan\PhpIter\Collection\ArrayCollection;
 use Siketyan\PhpIter\Transformer\Enumerate;
 use Siketyan\PhpIter\Transformer\Filter;
+use Siketyan\PhpIter\Transformer\FlatMap;
 use Siketyan\PhpIter\Transformer\Map;
 use Siketyan\PhpIter\Transformer\Zip;
 
@@ -41,6 +42,16 @@ abstract class AbstractIterator implements Iterator
     public function filter(\Closure $fn): Filter
     {
         return new Filter($this, $fn);
+    }
+
+    /**
+     * @template TOut
+     * @param \Closure(TItem): Iterator<TOut> $fn
+     * @return FlatMap<TItem, TOut>
+     */
+    public function flatMap(\Closure $fn): FlatMap
+    {
+        return new FlatMap($this, $fn);
     }
 
     /**
