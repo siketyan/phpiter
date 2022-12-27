@@ -32,9 +32,9 @@ iter([1, 2, 3, 4, 5])
 - [x] enumerate
 - [ ] eq
 - [x] filter
-- [ ] filter_map
-- [ ] find
-- [ ] find_map
+- [x] filter_map
+- [x] find
+- [x] find_map
 - [x] flat_map
 - [ ] flatten
 - [ ] fold

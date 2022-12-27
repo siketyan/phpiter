@@ -8,6 +8,8 @@ use Siketyan\PhpIter\Aggregator\Any;
 use Siketyan\PhpIter\Aggregator\Collect;
 use Siketyan\PhpIter\Aggregator\Count;
 use Siketyan\PhpIter\Aggregator\Every;
+use Siketyan\PhpIter\Aggregator\Find;
+use Siketyan\PhpIter\Aggregator\FindMap;
 use Siketyan\PhpIter\Aggregator\ForEach_;
 use Siketyan\PhpIter\Aggregator\Nth;
 use Siketyan\PhpIter\Aggregator\Some;
@@ -15,6 +17,7 @@ use Siketyan\PhpIter\Atom\Option;
 use Siketyan\PhpIter\Collection\ArrayCollection;
 use Siketyan\PhpIter\Transformer\Enumerate;
 use Siketyan\PhpIter\Transformer\Filter;
+use Siketyan\PhpIter\Transformer\FilterMap;
 use Siketyan\PhpIter\Transformer\FlatMap;
 use Siketyan\PhpIter\Transformer\Map;
 use Siketyan\PhpIter\Transformer\Skip;
@@ -50,6 +53,16 @@ abstract class AbstractIterator implements Iterator
     public function filter(\Closure $fn): Filter
     {
         return new Filter($this, $fn);
+    }
+
+    /**
+     * @template TOut
+     * @param \Closure(TItem): Option<TOut> $fn
+     * @return FilterMap<TItem, TOut>
+     */
+    public function filterMap(\Closure $fn): FilterMap
+    {
+        return new FilterMap($this, $fn);
     }
 
     /**
@@ -146,6 +159,25 @@ abstract class AbstractIterator implements Iterator
     public function every(\Closure $fn): bool
     {
         return (new Every($this, $fn))();
+    }
+
+    /**
+     * @param \Closure(TItem): bool $fn
+     * @return Option<TItem>
+     */
+    public function find(\Closure $fn): Option
+    {
+        return (new Find($this, $fn))();
+    }
+
+    /**
+     * @template TOut
+     * @param \Closure(TItem): Option<TOut> $fn
+     * @return Option<TOut>
+     */
+    public function findMap(\Closure $fn): Option
+    {
+        return (new FindMap($this, $fn))();
     }
 
     /**
