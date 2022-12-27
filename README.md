@@ -52,12 +52,12 @@ iter([1, 2, 3, 4, 5])
 - [ ] rposition
 - [ ] scan
 - [ ] size_hint
-- [ ] skip
-- [ ] skip_while
+- [x] skip
+- [x] skip_while
 - [ ] step_by
 - [ ] sum
-- [ ] take
-- [ ] take_while
+- [x] take
+- [x] take_while
 - [ ] try_fold
 - [ ] try_for_each
 - [ ] unzip

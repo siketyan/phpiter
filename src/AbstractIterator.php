@@ -13,6 +13,10 @@ use Siketyan\PhpIter\Transformer\Enumerate;
 use Siketyan\PhpIter\Transformer\Filter;
 use Siketyan\PhpIter\Transformer\FlatMap;
 use Siketyan\PhpIter\Transformer\Map;
+use Siketyan\PhpIter\Transformer\Skip;
+use Siketyan\PhpIter\Transformer\SkipWhile;
+use Siketyan\PhpIter\Transformer\Take;
+use Siketyan\PhpIter\Transformer\TakeWhile;
 use Siketyan\PhpIter\Transformer\Zip;
 
 /**
@@ -56,12 +60,46 @@ abstract class AbstractIterator implements Iterator
 
     /**
      * @template TOut
-     * @param  \Closure(TItem): TOut $fn
+     * @param \Closure(TItem): TOut $fn
      * @return Map<TItem, TOut>
      */
     public function map(\Closure $fn): Map
     {
         return new Map($this, $fn);
+    }
+
+    /**
+     * @return Skip<TItem>
+     */
+    public function skip(int $count): Skip
+    {
+        return new Skip($this, $count);
+    }
+
+    /**
+     * @param \Closure(TItem): bool $fn
+     * @return SkipWhile<TItem>
+     */
+    public function skipWhile(\Closure $fn): SkipWhile
+    {
+        return new SkipWhile($this, $fn);
+    }
+
+    /**
+     * @return Take<TItem>
+     */
+    public function take(int $count): Take
+    {
+        return new Take($this, $count);
+    }
+
+    /**
+     * @param \Closure(TItem): bool $fn
+     * @return TakeWhile<TItem>
+     */
+    public function takeWhile(\Closure $fn): TakeWhile
+    {
+        return new TakeWhile($this, $fn);
     }
 
     /**
