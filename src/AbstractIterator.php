@@ -6,6 +6,7 @@ namespace Siketyan\PhpIter;
 
 use Siketyan\PhpIter\Aggregator\Collect;
 use Siketyan\PhpIter\Collection\ArrayCollection;
+use Siketyan\PhpIter\Transformer\Filter;
 use Siketyan\PhpIter\Transformer\Map;
 
 /**
@@ -18,6 +19,17 @@ abstract class AbstractIterator implements Iterator
     {
     }
 
+    // region Transformers
+
+    /**
+     * @param \Closure(TItem): bool $fn
+     * @return Filter<TItem>
+     */
+    public function filter(\Closure $fn): Filter
+    {
+        return new Filter($this, $fn);
+    }
+
     /**
      * @template TOut
      * @param  \Closure(TItem): TOut $fn
@@ -28,6 +40,9 @@ abstract class AbstractIterator implements Iterator
         return new Map($this, $fn);
     }
 
+    // endregion Transformers
+    // region Aggregators
+
     /**
      * @return ArrayCollection<TItem>
      */
@@ -35,4 +50,6 @@ abstract class AbstractIterator implements Iterator
     {
         return (new Collect($this))();
     }
+
+    // endregion Aggregators
 }
