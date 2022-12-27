@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Siketyan\PhpIter\Tests\Transformer;
 
 use PHPUnit\Framework\TestCase;
-use Siketyan\PhpIter\Collection\ArrayCollection;
+
+use function Siketyan\PhpIter\iter;
 
 class MapTest extends TestCase
 {
@@ -13,8 +14,7 @@ class MapTest extends TestCase
     {
         $this->assertSame(
             [123, 456, 789],
-            (new ArrayCollection(['123', '456', '789']))
-                ->iter()
+            iter(['123', '456', '789'])
                 ->map(fn (string $value): int => (int)$value)
                 ->collect()
                 ->toArray(),

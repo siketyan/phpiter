@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Siketyan\PhpIter\Tests\Transformer;
 
 use PHPUnit\Framework\TestCase;
-use Siketyan\PhpIter\Collection\ArrayCollection;
+
+use function Siketyan\PhpIter\iter;
 
 class ZipTest extends TestCase
 {
@@ -19,9 +20,8 @@ class ZipTest extends TestCase
                 [4, 'four'],
                 [5, 'five'],
             ],
-            (new ArrayCollection([1, 2, 3, 4, 5]))
-                ->iter()
-                ->zip((new ArrayCollection(['one', 'two', 'three', 'four', 'five']))->iter())
+            iter([1, 2, 3, 4, 5])
+                ->zip(iter(['one', 'two', 'three', 'four', 'five']))
                 ->collect()
                 ->toArray(),
         );
