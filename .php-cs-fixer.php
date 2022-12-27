@@ -13,6 +13,7 @@ $config->setRules([
         'import_constants' => false,
         'import_functions' => false,
     ],
+    'phpdoc_to_comment' => false,
 ]);
 
 return $config->setFinder(

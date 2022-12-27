@@ -27,7 +27,7 @@ iter([1, 2, 3, 4, 5])
 - [ ] chain
 - [ ] cloned
 - [x] collect
-- [ ] count
+- [x] count
 - [ ] cycle
 - [x] enumerate
 - [ ] eq
@@ -38,11 +38,11 @@ iter([1, 2, 3, 4, 5])
 - [x] flat_map
 - [ ] flatten
 - [ ] fold
-- [ ] for_each
+- [x] for_each
 - [ ] fuse
 - [ ] inspect
 - [ ] last
-- [ ] nth
+- [x] nth
 - [ ] partition
 - [ ] peekable
 - [ ] position
@@ -55,7 +55,7 @@ iter([1, 2, 3, 4, 5])
 - [x] skip
 - [x] skip_while
 - [ ] step_by
-- [ ] sum
+- [x] sum
 - [x] take
 - [x] take_while
 - [ ] try_fold

@@ -6,8 +6,12 @@ namespace Siketyan\PhpIter;
 
 use Siketyan\PhpIter\Aggregator\Any;
 use Siketyan\PhpIter\Aggregator\Collect;
+use Siketyan\PhpIter\Aggregator\Count;
 use Siketyan\PhpIter\Aggregator\Every;
+use Siketyan\PhpIter\Aggregator\ForEach_;
+use Siketyan\PhpIter\Aggregator\Nth;
 use Siketyan\PhpIter\Aggregator\Some;
+use Siketyan\PhpIter\Atom\Option;
 use Siketyan\PhpIter\Collection\ArrayCollection;
 use Siketyan\PhpIter\Transformer\Enumerate;
 use Siketyan\PhpIter\Transformer\Filter;
@@ -131,12 +135,33 @@ abstract class AbstractIterator implements Iterator
         return (new Collect($this))();
     }
 
+    public function count(): int
+    {
+        return (new Count($this))();
+    }
+
     /**
      * @param \Closure(TItem): bool $fn
      */
     public function every(\Closure $fn): bool
     {
         return (new Every($this, $fn))();
+    }
+
+    /**
+     * @param \Closure(TItem): void $fn
+     */
+    public function forEach(\Closure $fn): void
+    {
+        (new ForEach_($this, $fn))();
+    }
+
+    /**
+     * @return Option<TItem>
+     */
+    public function nth(int $n): Option
+    {
+        return (new Nth($this, $n))();
     }
 
     /**
