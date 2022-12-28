@@ -24,11 +24,11 @@ Iter::of([1, 2, 3, 4, 5])
 ## ✅ TODO
 - [x] all
 - [x] any
-- [ ] chain
-- [ ] cloned
+- [x] chain
+- [x] cloned
 - [x] collect
 - [x] count
-- [ ] cycle
+- [x] cycle
 - [x] enumerate
 - [ ] eq
 - [x] filter

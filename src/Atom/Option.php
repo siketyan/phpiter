@@ -44,6 +44,17 @@ class Option
     }
 
     /**
+     * @param \Closure(): Option<TItem> $fn
+     * @return Option<TItem>
+     */
+    public function orElse(\Closure $fn): self
+    {
+        return $this->isSome()
+            ? $this
+            : $fn->call($this);
+    }
+
+    /**
      * @template TOut
      * @param \Closure(TItem): TOut $fn
      * @return Option<TOut>

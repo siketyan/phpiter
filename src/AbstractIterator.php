@@ -14,6 +14,9 @@ use Siketyan\PhpIter\Aggregator\ForEach_;
 use Siketyan\PhpIter\Aggregator\Nth;
 use Siketyan\PhpIter\Atom\Option;
 use Siketyan\PhpIter\Collection\ArrayCollection;
+use Siketyan\PhpIter\Transformer\Chain;
+use Siketyan\PhpIter\Transformer\Cloned;
+use Siketyan\PhpIter\Transformer\Cycle;
 use Siketyan\PhpIter\Transformer\Enumerate;
 use Siketyan\PhpIter\Transformer\Filter;
 use Siketyan\PhpIter\Transformer\FilterMap;
@@ -36,6 +39,31 @@ abstract class AbstractIterator implements Iterator
     }
 
     // region Transformers
+
+    /**
+     * @param  Iterator<TItem> $another
+     * @return Chain<TItem>
+     */
+    public function chain(Iterator $another): Chain
+    {
+        return new Chain($this, $another);
+    }
+
+    /**
+     * @return Cloned<TItem>
+     */
+    public function cloned(): Cloned
+    {
+        return new Cloned($this);
+    }
+
+    /**
+     * @return Cycle<TItem>
+     */
+    public function cycle(): Cycle
+    {
+        return new Cycle($this);
+    }
 
     /**
      * @return Enumerate<TItem>
