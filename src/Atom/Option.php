@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Siketyan\PhpIter\Atom;
 
+use Siketyan\PhpIter\Special\Monad\Monad;
+
 /**
  * @template TItem
  */
-class Option
+class Option implements Monad
 {
     /**
      * @param TItem $value
@@ -44,6 +46,18 @@ class Option
     }
 
     /**
+     * @template TOut
+     * @param \Closure(TItem): Option<TOut> $fn
+     * @return Option<TOut>
+     */
+    public function andThen(\Closure $fn): self
+    {
+        return $this->isSome()
+            ? $fn->call($this, $this->unwrap())
+            : self::none();
+    }
+
+    /**
      * @param \Closure(): Option<TItem> $fn
      * @return Option<TItem>
      */
@@ -64,6 +78,11 @@ class Option
         return $this->isSome()
             ? self::some($fn->call($this, $this->value))
             : self::none();
+    }
+
+    public function canUnwrap(): bool
+    {
+        return $this->isSome();
     }
 
     /**

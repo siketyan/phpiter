@@ -8,8 +8,10 @@ use Siketyan\PhpIter\Aggregator\All;
 use Siketyan\PhpIter\Aggregator\Any;
 use Siketyan\PhpIter\Aggregator\Collect;
 use Siketyan\PhpIter\Aggregator\Count;
+use Siketyan\PhpIter\Aggregator\Eq;
 use Siketyan\PhpIter\Aggregator\Find;
 use Siketyan\PhpIter\Aggregator\FindMap;
+use Siketyan\PhpIter\Aggregator\Fold;
 use Siketyan\PhpIter\Aggregator\ForEach_;
 use Siketyan\PhpIter\Aggregator\Nth;
 use Siketyan\PhpIter\Atom\Option;
@@ -189,6 +191,14 @@ abstract class AbstractIterator implements Iterator
     }
 
     /**
+     * @param Iterator<TItem> $another
+     */
+    public function eq(Iterator $another): bool
+    {
+        return (new Eq($this, $another))();
+    }
+
+    /**
      * @param \Closure(TItem): bool $fn
      * @return Option<TItem>
      */
@@ -205,6 +215,17 @@ abstract class AbstractIterator implements Iterator
     public function findMap(\Closure $fn): Option
     {
         return (new FindMap($this, $fn))();
+    }
+
+    /**
+     * @template TAcc
+     * @param TAcc $init
+     * @param \Closure(TAcc, TItem): TAcc $fn
+     * @return TAcc
+     */
+    public function fold(mixed $init, \Closure $fn): mixed
+    {
+        return (new Fold($this, $init, $fn))();
     }
 
     /**

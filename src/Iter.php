@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Siketyan\PhpIter;
 
 use Siketyan\PhpIter\Initiator\Slice;
+use Siketyan\PhpIter\Special\Monad\Monad;
+use Siketyan\PhpIter\Special\Monad\MonadIterator;
 use Siketyan\PhpIter\Special\Number\NumberIterator;
 use Siketyan\PhpIter\Special\Number\NumberLike;
 
@@ -28,5 +30,16 @@ class Iter
     public static function number(Iterator $iter): NumberIterator
     {
         return new NumberIterator($iter);
+    }
+
+    /**
+     * @template TItem of Monad<TInner>
+     * @template TInner
+     * @param  Iterator<TItem>              $iter
+     * @return MonadIterator<TItem, TInner>
+     */
+    public static function monad(Iterator $iter): MonadIterator
+    {
+        return new MonadIterator($iter);
     }
 }

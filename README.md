@@ -30,14 +30,14 @@ Iter::of([1, 2, 3, 4, 5])
 - [x] count
 - [x] cycle
 - [x] enumerate
-- [ ] eq
+- [x] eq
 - [x] filter
 - [x] filter_map
 - [x] find
 - [x] find_map
 - [x] flat_map
-- [ ] flatten
-- [ ] fold
+- [x] flatten
+- [x] fold
 - [x] for_each
 - [ ] fuse
 - [ ] inspect
