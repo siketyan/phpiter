@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Siketyan\PhpIter\Tests\Transformer;
 
 use PHPUnit\Framework\TestCase;
-
-use function Siketyan\PhpIter\iter;
+use Siketyan\PhpIter\Iter;
 
 class EnumerateTest extends TestCase
 {
@@ -20,7 +19,7 @@ class EnumerateTest extends TestCase
                 [3, 'three'],
                 [4, 'four'],
             ],
-            iter(['zero', 'one', 'two', 'three', 'four'])
+            Iter::of(['zero', 'one', 'two', 'three', 'four'])
                 ->enumerate()
                 ->collect()
                 ->toArray(),

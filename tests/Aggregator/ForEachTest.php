@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Siketyan\PhpIter\Tests\Aggregator;
 
 use PHPUnit\Framework\TestCase;
-
-use function Siketyan\PhpIter\iter;
+use Siketyan\PhpIter\Iter;
 
 class ForEachTest extends TestCase
 {
@@ -14,7 +13,7 @@ class ForEachTest extends TestCase
     {
         $array = [];
 
-        iter(['a', 'b', 'c', 'd', 'e'])
+        Iter::of(['a', 'b', 'c', 'd', 'e'])
             ->forEach(function (string $value) use (&$array): void {
                 $array[] = $value;
             });

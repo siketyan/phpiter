@@ -6,8 +6,7 @@ namespace Siketyan\PhpIter\Tests\Aggregator;
 
 use PHPUnit\Framework\TestCase;
 use Siketyan\PhpIter\Atom\Option;
-
-use function Siketyan\PhpIter\iter;
+use Siketyan\PhpIter\Iter;
 
 class FindMapTest extends TestCase
 {
@@ -15,7 +14,7 @@ class FindMapTest extends TestCase
     {
         $this->assertSame(
             20,
-            iter([1, 2, 3, 4, 5])
+            Iter::of([1, 2, 3, 4, 5])
                 ->findMap(fn (int $value): Option => $value % 2 === 0 ? Option::some($value * 10) : Option::none())
                 ->unwrap(),
         );

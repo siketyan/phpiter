@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Siketyan\PhpIter\Tests\Aggregator;
 
 use PHPUnit\Framework\TestCase;
-
-use function Siketyan\PhpIter\iter;
-use function Siketyan\PhpIter\number_iter;
+use Siketyan\PhpIter\Iter;
 
 class SumTest extends TestCase
 {
@@ -15,12 +13,12 @@ class SumTest extends TestCase
     {
         $this->assertSame(
             15,
-            number_iter(iter([1, 2, 3, 4, 5]))
+            Iter::number(Iter::of([1, 2, 3, 4, 5]))
                 ->sum(),
         );
 
         $this->assertNull(
-            number_iter(iter([]))
+            Iter::number(Iter::of([]))
                 ->sum(),
         );
     }

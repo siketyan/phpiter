@@ -13,9 +13,9 @@ composer require siketyan/phpiter
 ## 💚 Examples
 ### Simple mapping
 ```php
-use function Siketyan\PhpIter\iter;
+use Siketyan\PhpIter\Iter;
 
-iter([1, 2, 3, 4, 5])
+Iter::of([1, 2, 3, 4, 5])
     ->map(fn ($value) => $value * 10)
     ->toArray();
 // -> [10, 20, 30, 40, 50]

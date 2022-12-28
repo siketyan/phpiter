@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Siketyan\PhpIter\Tests\Aggregator;
 
 use PHPUnit\Framework\TestCase;
-
-use function Siketyan\PhpIter\iter;
+use Siketyan\PhpIter\Iter;
 
 class CountTest extends TestCase
 {
@@ -14,7 +13,7 @@ class CountTest extends TestCase
     {
         $this->assertSame(
             5,
-            iter(['a', 'b', 'c', 'd', 'e'])
+            Iter::of(['a', 'b', 'c', 'd', 'e'])
                 ->count(),
         );
     }
