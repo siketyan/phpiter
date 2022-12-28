@@ -22,8 +22,8 @@ iter([1, 2, 3, 4, 5])
 ```
 
 ## ✅ TODO
-- [x] all (every)
-- [x] any (some)
+- [x] all
+- [x] any
 - [ ] chain
 - [ ] cloned
 - [x] collect

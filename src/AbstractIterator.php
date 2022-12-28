@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Siketyan\PhpIter;
 
+use Siketyan\PhpIter\Aggregator\All;
 use Siketyan\PhpIter\Aggregator\Any;
 use Siketyan\PhpIter\Aggregator\Collect;
 use Siketyan\PhpIter\Aggregator\Count;
-use Siketyan\PhpIter\Aggregator\Every;
 use Siketyan\PhpIter\Aggregator\Find;
 use Siketyan\PhpIter\Aggregator\FindMap;
 use Siketyan\PhpIter\Aggregator\ForEach_;
 use Siketyan\PhpIter\Aggregator\Nth;
-use Siketyan\PhpIter\Aggregator\Some;
 use Siketyan\PhpIter\Atom\Option;
 use Siketyan\PhpIter\Collection\ArrayCollection;
 use Siketyan\PhpIter\Transformer\Enumerate;
@@ -133,14 +132,6 @@ abstract class AbstractIterator implements Iterator
     // region Aggregators
 
     /**
-     * @param null|\Closure(TItem): bool $fn
-     */
-    public function any(?\Closure $fn = null): bool
-    {
-        return (new Any($fn === null ? $this : new Filter($this, $fn)))();
-    }
-
-    /**
      * @return ArrayCollection<TItem>
      */
     public function collect(): ArrayCollection
@@ -156,9 +147,17 @@ abstract class AbstractIterator implements Iterator
     /**
      * @param \Closure(TItem): bool $fn
      */
-    public function every(\Closure $fn): bool
+    public function all(\Closure $fn): bool
     {
-        return (new Every($this, $fn))();
+        return (new All($this, $fn))();
+    }
+
+    /**
+     * @param null|\Closure(TItem): bool $fn
+     */
+    public function any(?\Closure $fn = null): bool
+    {
+        return (new Any($fn === null ? $this : new Filter($this, $fn)))();
     }
 
     /**
@@ -194,14 +193,6 @@ abstract class AbstractIterator implements Iterator
     public function nth(int $n): Option
     {
         return (new Nth($this, $n))();
-    }
-
-    /**
-     * @param null|\Closure(TItem): bool $fn
-     */
-    public function some(?\Closure $fn = null): bool
-    {
-        return (new Some($fn === null ? $this : new Filter($this, $fn)))();
     }
 
     /**

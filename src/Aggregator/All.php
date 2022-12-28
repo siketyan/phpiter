@@ -10,18 +10,26 @@ use Siketyan\PhpIter\Iterator;
  * @template TItem
  * @implements Aggregator<TItem, bool>
  */
-class Some implements Aggregator
+class All implements Aggregator
 {
     /**
      * @param Iterator<TItem> $inner
+     * @param \Closure(TItem): bool $fn
      */
     public function __construct(
         private readonly Iterator $inner,
+        private readonly \Closure $fn,
     ) {
     }
 
     public function __invoke(): bool
     {
-        return $this->inner->next()->isSome();
+        while (($value = $this->inner->next())->isSome()) {
+            if (!$this->fn->call($this, $value->unwrap())) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

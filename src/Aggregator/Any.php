@@ -4,14 +4,24 @@ declare(strict_types=1);
 
 namespace Siketyan\PhpIter\Aggregator;
 
+use Siketyan\PhpIter\Iterator;
+
 /**
  * @template TItem
- * @extends Some<TItem>
+ * @implements Aggregator<TItem, bool>
  */
-class Any extends Some
+class Any implements Aggregator
 {
+    /**
+     * @param Iterator<TItem> $inner
+     */
+    public function __construct(
+        private readonly Iterator $inner,
+    ) {
+    }
+
     public function __invoke(): bool
     {
-        return !parent::__invoke();
+        return $this->inner->next()->isSome();
     }
 }
