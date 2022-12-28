@@ -16,6 +16,8 @@ use Siketyan\PhpIter\Aggregator\ForEach_;
 use Siketyan\PhpIter\Aggregator\Last;
 use Siketyan\PhpIter\Aggregator\Nth;
 use Siketyan\PhpIter\Aggregator\Partition;
+use Siketyan\PhpIter\Aggregator\Position;
+use Siketyan\PhpIter\Aggregator\Rposition;
 use Siketyan\PhpIter\Atom\Option;
 use Siketyan\PhpIter\Collection\ArrayCollection;
 use Siketyan\PhpIter\Transformer\Chain;
@@ -289,6 +291,24 @@ abstract class AbstractIterator implements Iterator
     public function partition(\Closure $fn): array
     {
         return (new Partition($this, $fn))();
+    }
+
+    /**
+     * @param \Closure(TItem): bool $fn
+     * @return Option<int>
+     */
+    public function position(\Closure $fn): Option
+    {
+        return (new Position($this, $fn))();
+    }
+
+    /**
+     * @param \Closure(TItem): bool $fn
+     * @return Option<int>
+     */
+    public function rposition(\Closure $fn): Option
+    {
+        return (new Rposition($this, $fn))();
     }
 
     /**

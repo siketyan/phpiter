@@ -45,11 +45,11 @@ Iter::of([1, 2, 3, 4, 5])
 - [x] nth
 - [x] partition
 - [x] peekable
-- [ ] position
+- [x] position
 - [ ] product
 - [ ] reduce
 - [ ] rev
-- [ ] rposition
+- [x] rposition
 - [ ] scan
 - [ ] size_hint
 - [x] skip
