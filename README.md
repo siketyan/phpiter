@@ -39,12 +39,12 @@ Iter::of([1, 2, 3, 4, 5])
 - [x] flatten
 - [x] fold
 - [x] for_each
-- [ ] fuse
+- [x] fuse
 - [x] inspect
 - [x] last
 - [x] nth
 - [x] partition
-- [ ] peekable
+- [x] peekable
 - [ ] position
 - [ ] product
 - [ ] reduce

@@ -25,8 +25,10 @@ use Siketyan\PhpIter\Transformer\Enumerate;
 use Siketyan\PhpIter\Transformer\Filter;
 use Siketyan\PhpIter\Transformer\FilterMap;
 use Siketyan\PhpIter\Transformer\FlatMap;
+use Siketyan\PhpIter\Transformer\Fuse;
 use Siketyan\PhpIter\Transformer\Inspect;
 use Siketyan\PhpIter\Transformer\Map;
+use Siketyan\PhpIter\Transformer\Peekable;
 use Siketyan\PhpIter\Transformer\Skip;
 use Siketyan\PhpIter\Transformer\SkipWhile;
 use Siketyan\PhpIter\Transformer\Take;
@@ -108,6 +110,14 @@ abstract class AbstractIterator implements Iterator
     }
 
     /**
+     * @return Fuse<TItem>
+     */
+    public function fuse(): Fuse
+    {
+        return new Fuse($this);
+    }
+
+    /**
      * @param \Closure(TItem): void $fn
      * @return Inspect<TItem>
      */
@@ -124,6 +134,14 @@ abstract class AbstractIterator implements Iterator
     public function map(\Closure $fn): Map
     {
         return new Map($this, $fn);
+    }
+
+    /**
+     * @return Peekable<TItem>
+     */
+    public function peekable(): Peekable
+    {
+        return new Peekable($this);
     }
 
     /**
