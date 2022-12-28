@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Siketyan\PhpIter\Special\Number;
 
 use Siketyan\PhpIter\AbstractIterator;
+use Siketyan\PhpIter\Aggregator\Product;
 use Siketyan\PhpIter\Aggregator\Sum;
 use Siketyan\PhpIter\Atom\Option;
 use Siketyan\PhpIter\Iterator;
@@ -30,6 +31,15 @@ class NumberIterator extends AbstractIterator implements Iterator
     public function next(): Option
     {
         return $this->inner->next();
+    }
+
+    /**
+     * @return TItem
+     * @noinspection PhpDocSignatureInspection
+     */
+    public function product(): null|int|float|NumberLike
+    {
+        return (new Product($this))();
     }
 
     /**

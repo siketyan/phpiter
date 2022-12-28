@@ -17,6 +17,7 @@ use Siketyan\PhpIter\Aggregator\Last;
 use Siketyan\PhpIter\Aggregator\Nth;
 use Siketyan\PhpIter\Aggregator\Partition;
 use Siketyan\PhpIter\Aggregator\Position;
+use Siketyan\PhpIter\Aggregator\Reduce;
 use Siketyan\PhpIter\Aggregator\Rposition;
 use Siketyan\PhpIter\Atom\Option;
 use Siketyan\PhpIter\Collection\ArrayCollection;
@@ -300,6 +301,15 @@ abstract class AbstractIterator implements Iterator
     public function position(\Closure $fn): Option
     {
         return (new Position($this, $fn))();
+    }
+
+    /**
+     * @param \Closure(TItem, TItem): TItem $fn
+     * @return Option<TItem>
+     */
+    public function reduce(\Closure $fn): Option
+    {
+        return (new Reduce($this, $fn))();
     }
 
     /**

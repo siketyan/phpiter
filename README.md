@@ -46,8 +46,8 @@ Iter::of([1, 2, 3, 4, 5])
 - [x] partition
 - [x] peekable
 - [x] position
-- [ ] product
-- [ ] reduce
+- [x] product
+- [x] reduce
 - [ ] rev
 - [x] rposition
 - [ ] scan

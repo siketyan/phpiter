@@ -11,7 +11,7 @@ use Siketyan\PhpIter\Special\Number\NumberLike;
  * @template TItem of int|float|NumberLike
  * @implements Aggregator<TItem, TItem>
  */
-class Sum implements Aggregator
+class Product implements Aggregator
 {
     /**
      * @param Iterator<TItem> $inner
@@ -26,29 +26,29 @@ class Sum implements Aggregator
      */
     public function __invoke(): mixed
     {
-        $sum = null;
+        $product = null;
 
-        (new ForEach_($this->inner, function (mixed $value) use (&$sum): void {
+        (new ForEach_($this->inner, function (mixed $value) use (&$product): void {
             /** @var TItem $value */
-            if ($sum === null) {
-                /** @var TItem $zero */
-                $zero = $value instanceof NumberLike
-                    ? $value->zero()
-                    : (is_float($value) ? 0.0 : 0);
+            if ($product === null) {
+                /** @var TItem $one */
+                $one = $value instanceof NumberLike
+                    ? $value->one()
+                    : (is_float($value) ? 1.0 : 1);
 
-                $sum = $zero;
+                $product = $one;
             }
 
-            if ($sum instanceof NumberLike) {
+            if ($product instanceof NumberLike) {
                 assert($value instanceof NumberLike);
-                $sum = $sum->add($value);
+                $product = $product->multiply($value);
             } else {
                 assert(is_float($value) || is_int($value));
-                $sum = $sum + $value;
+                $product = $product * $value;
             }
         }))();
 
-        /** @var null|TItem $sum */
-        return $sum;
+        /** @var null|TItem $product */
+        return $product;
     }
 }
