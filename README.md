@@ -40,10 +40,10 @@ Iter::of([1, 2, 3, 4, 5])
 - [x] fold
 - [x] for_each
 - [ ] fuse
-- [ ] inspect
-- [ ] last
+- [x] inspect
+- [x] last
 - [x] nth
-- [ ] partition
+- [x] partition
 - [ ] peekable
 - [ ] position
 - [ ] product

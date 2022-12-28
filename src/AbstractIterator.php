@@ -13,7 +13,9 @@ use Siketyan\PhpIter\Aggregator\Find;
 use Siketyan\PhpIter\Aggregator\FindMap;
 use Siketyan\PhpIter\Aggregator\Fold;
 use Siketyan\PhpIter\Aggregator\ForEach_;
+use Siketyan\PhpIter\Aggregator\Last;
 use Siketyan\PhpIter\Aggregator\Nth;
+use Siketyan\PhpIter\Aggregator\Partition;
 use Siketyan\PhpIter\Atom\Option;
 use Siketyan\PhpIter\Collection\ArrayCollection;
 use Siketyan\PhpIter\Transformer\Chain;
@@ -23,6 +25,7 @@ use Siketyan\PhpIter\Transformer\Enumerate;
 use Siketyan\PhpIter\Transformer\Filter;
 use Siketyan\PhpIter\Transformer\FilterMap;
 use Siketyan\PhpIter\Transformer\FlatMap;
+use Siketyan\PhpIter\Transformer\Inspect;
 use Siketyan\PhpIter\Transformer\Map;
 use Siketyan\PhpIter\Transformer\Skip;
 use Siketyan\PhpIter\Transformer\SkipWhile;
@@ -102,6 +105,15 @@ abstract class AbstractIterator implements Iterator
     public function flatMap(\Closure $fn): FlatMap
     {
         return new FlatMap($this, $fn);
+    }
+
+    /**
+     * @param \Closure(TItem): void $fn
+     * @return Inspect<TItem>
+     */
+    public function inspect(\Closure $fn): Inspect
+    {
+        return new Inspect($this, $fn);
     }
 
     /**
@@ -239,9 +251,26 @@ abstract class AbstractIterator implements Iterator
     /**
      * @return Option<TItem>
      */
+    public function last(): Option
+    {
+        return (new Last($this))();
+    }
+
+    /**
+     * @return Option<TItem>
+     */
     public function nth(int $n): Option
     {
         return (new Nth($this, $n))();
+    }
+
+    /**
+     * @param \Closure(TItem): bool $fn
+     * @return array{TItem[], TItem[]}
+     */
+    public function partition(\Closure $fn): array
+    {
+        return (new Partition($this, $fn))();
     }
 
     /**
