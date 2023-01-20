@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Siketyan\PhpIter;
 
+use Siketyan\PhpIter\Initiator\Iterator as IteratorInitiator;
 use Siketyan\PhpIter\Initiator\Slice;
 use Siketyan\PhpIter\Special\Monad\Monad;
 use Siketyan\PhpIter\Special\Monad\MonadIterator;
@@ -14,11 +15,15 @@ class Iter
 {
     /**
      * @template TItem
-     * @param  TItem[]      $values
-     * @return Slice<TItem>
+     * @param  array<TItem>|\Iterator<mixed, TItem>  $values
+     * @return Slice<TItem>|IteratorInitiator<TItem>
      */
-    public static function of(array $values): Slice
+    public static function of(array|\Iterator $values): Slice|IteratorInitiator
     {
+        if ($values instanceof \Iterator) {
+            return new IteratorInitiator($values);
+        }
+
         return new Slice($values);
     }
 
